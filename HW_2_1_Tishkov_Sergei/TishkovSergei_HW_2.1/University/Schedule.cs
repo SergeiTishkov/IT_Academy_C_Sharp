@@ -99,6 +99,7 @@ namespace Education
             }
         }
 
+        // TODO Идея понятна, но реализация не очень. А если бы вам пришлось на весь месяц расписание писать?
         public IEnumerator<Lection> GetEnumerator()
         {
             yield return MondaySchedule[0];

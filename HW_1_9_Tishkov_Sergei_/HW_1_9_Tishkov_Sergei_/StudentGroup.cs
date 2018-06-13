@@ -23,6 +23,7 @@ namespace HW_1_9_Tishkov_Sergei_
                     return null;
                 }
             }
+            // TODO Удаляйте ненужный код
             //set
             //{
             //    if (index < _studentList.Count) 
@@ -39,11 +40,6 @@ namespace HW_1_9_Tishkov_Sergei_
             _studentList.Add(student);
         }
 
-        public IEnumerator<Student> GetEnumerator()
-        {
-            return _studentList.GetEnumerator();
-        }
-
         public void RemoveStudent(Student student)
         {
             if (_studentList.Contains(student))
@@ -52,9 +48,25 @@ namespace HW_1_9_Tishkov_Sergei_
                 Console.WriteLine("Студент не является членом этой группы");
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        // TODO Не оставяйте не имплементированный метод.
+        //IEnumerator IEnumerable.GetEnumerator()
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public IEnumerator<Student> GetEnumerator()
+        //{
+        //    return _studentList.GetEnumerator();
+        //}
+        
+        public IEnumerator<Student> GetEnumerator()
         {
             throw new NotImplementedException();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

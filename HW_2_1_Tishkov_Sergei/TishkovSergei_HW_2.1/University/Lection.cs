@@ -13,7 +13,9 @@ namespace Education
         internal readonly LectionType TypeOfLection;
         internal readonly DayOfWeek Day;
         internal readonly int NumberOfLection;
-        internal readonly University Univer;
+
+        // TODO Лекция точно должна знать о лекторе и университете?
+        internal readonly University Univer; 
         internal Teacher Lector;
 
         private Lection(LectionType typeOfLection, DayOfWeek day, int numberOfLection, University univer, Teacher lector)

@@ -22,6 +22,7 @@ namespace Education.Humans
 
         internal void Work(Lection lection)
         {
+            // TODO Тернарник
             if(lection.Lector == this)
                 Console.WriteLine($"{CanTeach} teacher {FullName} is teaching students.");
             else
