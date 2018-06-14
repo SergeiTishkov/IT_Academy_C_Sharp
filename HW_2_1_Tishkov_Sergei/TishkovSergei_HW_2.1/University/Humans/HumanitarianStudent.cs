@@ -19,6 +19,7 @@ namespace Education.Humans
 
         public override void Learn(Lection lection)
         {
+            // TOdO выбор значения - следует использовать тернарный оператор.
             if ((int)lection.TypeOfLection < 3)
             {
                 Console.WriteLine($"{this} is bored to sleep by {lection}.");

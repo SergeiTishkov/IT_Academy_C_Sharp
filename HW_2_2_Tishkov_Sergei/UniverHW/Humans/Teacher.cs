@@ -23,7 +23,7 @@ namespace UniverHW.Humans
             (obj is Teacher other &&
             FirstName == other.FirstName &&
             LastName == other.LastName &&
-            Department == other.Department) ? true : false;
+            Department == other.Department) ? true : false; // TODO Опять `if true return true`
         
 
         public override string ToString()

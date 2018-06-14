@@ -19,6 +19,7 @@ namespace Education.Humans
 
         public override void Learn(Lection lection)
         {
+            // TODO Почему не сделать проверку непосредственно по ENUM. Зачем приводить к INT?
             if ((int)lection.TypeOfLection > 2)
             {
                 Console.WriteLine($"{this} is bored to sleep by {lection}.");

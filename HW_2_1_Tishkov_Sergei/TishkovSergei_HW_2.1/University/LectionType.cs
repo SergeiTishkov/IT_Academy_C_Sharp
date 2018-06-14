@@ -6,5 +6,12 @@ using System.Threading.Tasks;
 
 namespace Education
 {
-    public enum LectionType { Math = 1, Physics, Literature, History }
+    // TODO стоило использовать флаги
+    public enum LectionType
+    {
+        Math = 1,
+        Physics,
+        Literature,
+        History
+    }
 }

@@ -55,10 +55,12 @@ namespace UniverHW
             _giveMoneyToDepartment(HistoryDepartment);
         }
 
+        // TODO Методы всегда с большой и без подчёркиваний. 
         private void _giveMoneyToDepartment(List<HomoSapiens> department)
         {
             foreach (var human in department)
             {
+                // TODO идея была в том чтобы определить что это за тип и вызвать нужный метод
                 human.GetMoney();
             }
         }
@@ -77,7 +79,9 @@ namespace UniverHW
                     case Student student:
                         Console.WriteLine($"Student {student.FirstName} {student.LastName} was added to the {student.Department} Department");
                         break;
-                    case Teacher teacher when (teacher as HeadOfDepartment) == null:
+                    // TODO Как-то уже слишком усложнили
+                    //case Teacher teacher when (teacher as HeadOfDepartment) == null:
+                    case Teacher teacher when !(teacher is HeadOfDepartment):
                         Console.WriteLine($"Teacher {teacher.FirstName} {teacher.LastName} was added to the {teacher.Department} Department");
                         break;
                     case HeadOfDepartment head:
