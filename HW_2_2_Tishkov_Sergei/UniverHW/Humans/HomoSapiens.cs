@@ -20,7 +20,5 @@ namespace UniverHW.Humans
             Department = department;
             Gender = gender;
         }
-
-        public abstract void GetMoney();
     }
 }

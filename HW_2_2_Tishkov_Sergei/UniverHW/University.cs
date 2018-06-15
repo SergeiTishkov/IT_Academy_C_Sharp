@@ -29,13 +29,13 @@ namespace UniverHW
             switch (human.Department)
             {
                 case UniversityDepartment.Tech:
-                    _addHuman(TechDepartment, human);
+                    AddHuman(TechDepartment, human);
                     break;
                 case UniversityDepartment.Math:
-                    _addHuman(MathDepartment, human);
+                    AddHuman(MathDepartment, human);
                     break;
                 case UniversityDepartment.History:
-                    _addHuman(HistoryDepartment, human);
+                    AddHuman(HistoryDepartment, human);
                     break;
             }
         }
@@ -48,24 +48,38 @@ namespace UniverHW
             }
         }
 
-        public void GiveThemMoney()
+        public void MakeUniversityWork()
         {
-            _giveMoneyToDepartment(TechDepartment);
-            _giveMoneyToDepartment(MathDepartment);
-            _giveMoneyToDepartment(HistoryDepartment);
+            MakeDepartmentDoWhatItShouldDo(TechDepartment);
+            MakeDepartmentDoWhatItShouldDo(MathDepartment);
+            MakeDepartmentDoWhatItShouldDo(HistoryDepartment);
         }
 
-        // TODO Методы всегда с большой и без подчёркиваний. 
-        private void _giveMoneyToDepartment(List<HomoSapiens> department)
+        private void MakeDepartmentDoWhatItShouldDo(List<HomoSapiens> department)
         {
             foreach (var human in department)
             {
                 // TODO идея была в том чтобы определить что это за тип и вызвать нужный метод
-                human.GetMoney();
+                // human.GetMoney(); <- старый код, абстрактный метод, который я удалил
+                switch (human)
+                {
+                    case Student student:
+                        student.Learn();
+                        break;
+                    case Teacher teacher when !(teacher is HeadOfDepartment):
+                        teacher.Teach();
+                        break;
+                    case HeadOfDepartment head:
+                        head.Teach();
+                        head.RuleDepartment();
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 
-        private void _addHuman(List<HomoSapiens> departmentList, HomoSapiens human)
+        private void AddHuman(List<HomoSapiens> departmentList, HomoSapiens human)
         {
             if (departmentList.Contains(human))
             {
@@ -79,8 +93,6 @@ namespace UniverHW
                     case Student student:
                         Console.WriteLine($"Student {student.FirstName} {student.LastName} was added to the {student.Department} Department");
                         break;
-                    // TODO Как-то уже слишком усложнили
-                    //case Teacher teacher when (teacher as HeadOfDepartment) == null:
                     case Teacher teacher when !(teacher is HeadOfDepartment):
                         Console.WriteLine($"Teacher {teacher.FirstName} {teacher.LastName} was added to the {teacher.Department} Department");
                         break;

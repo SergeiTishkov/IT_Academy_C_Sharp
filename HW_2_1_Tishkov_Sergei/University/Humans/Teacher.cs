@@ -20,13 +20,10 @@ namespace Education.Humans
             Work(lection);
         }
 
-        internal void Work(Lection lection)
-        {
-            // TODO Тернарник
-            if(lection.Lector == this)
-                Console.WriteLine($"{CanTeach} teacher {FullName} is teaching students.");
-            else
-                Console.WriteLine($"{CanTeach} teacher {FullName} is sleeping at home during {lection}.");
-        }
+        internal void Work(Lection lection) => // TODO (сделано) реализовал тернарник
+            Console.WriteLine(
+                lection.Lector == this ?
+                $"{CanTeach} teacher {FullName} is teaching students." :
+                $"{CanTeach} teacher {FullName} is sleeping at home during {lection}.");
     }
 }

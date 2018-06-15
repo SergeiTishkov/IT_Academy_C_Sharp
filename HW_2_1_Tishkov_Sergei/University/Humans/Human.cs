@@ -10,10 +10,7 @@ namespace Education.Humans
     {
         public readonly string FullName;
 
-        public Human(string fullName)
-        {
-            FullName = fullName;
-        }
+        public Human(string fullName) => FullName = fullName;
 
         public abstract void DoingBusiness(Lection lection);
     }

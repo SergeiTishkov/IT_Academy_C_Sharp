@@ -10,11 +10,7 @@ namespace UniverHW.Humans
     {
         public Student(string firstName, string lastName, UniversityDepartment department, AllExistingGenders gender) : base(firstName, lastName, department, gender) { }
 
-        public override void GetMoney()
-        {
-            Console.WriteLine($"{this} got " + (Gender == AllExistingGenders.Male ? "his" : "her") + " scholarship money... and wasted it on booze in half of an hour!");
-            Console.WriteLine($"What {FirstName} {LastName} is going to do next month?..\n");
-        }
+        public void Learn() => Console.WriteLine($"{this} is studying " + (Gender == AllExistingGenders.Male ? "his" : "her") + " lessons.\n");
 
         public override bool Equals(object obj)
             =>
@@ -23,9 +19,8 @@ namespace UniverHW.Humans
             LastName == other.LastName &&
             Department == other.Department) ? true : false;
 
-        public override string ToString()
-        {
-            return $"Student {FirstName} {LastName} from {Department} Department";
-        }
+        public override string ToString() => $"Student {FirstName} {LastName} from {Department} Department";
+
+        public override int GetHashCode() => this.ToString().GetHashCode() + (int)Gender; // переопределял чтобы класс зеленым не подчеркивало, не нравится
     }
 }

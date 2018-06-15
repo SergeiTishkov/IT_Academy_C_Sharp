@@ -77,9 +77,9 @@ namespace HW_2_2_Tishkov_Sergei
             var techTeacher1 = new Teacher("Severus", "Snape", UniversityDepartment.Tech, AllExistingGenders.Male);
             univer.AddPeople(techTeacher1);
 
-            Console.WriteLine("\n\nА теперь пробуем дать им денег:");
+            Console.WriteLine("\n\nА теперь заставим универ работать:");
 
-            univer.GiveThemMoney();
+            univer.MakeUniversityWork();
 
         }
     }

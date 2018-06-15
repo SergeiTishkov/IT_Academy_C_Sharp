@@ -14,32 +14,17 @@ namespace Education
         internal readonly DayOfWeek Day;
         internal readonly int NumberOfLection;
 
-        // TODO Лекция точно должна знать о лекторе и университете?
+        // TODO (должна) Лекция точно должна знать о лекторе и университете? // о лекторе должна, чтобы по этому полю определять, спит ли лектор дома или усердно учит учеников, а о универе должна знать, чтобы посмотреть, есть ли такой препод в штате этого универа или нет
         internal readonly University Univer; 
         internal Teacher Lector;
 
         private Lection(LectionType typeOfLection, DayOfWeek day, int numberOfLection, University univer, Teacher lector)
         {
-            //if(day == DayOfWeek.Sunday)
-            //    throw new Exception("There isn't lections on Sunday!"); // я просто не знаю, как предотвратить создание класса с неверными параметрами! Разве что создать метод Factory?
-            //if (numberOfLection > 3)                                    // который возвращал бы объект Lection только, если ему передаются верные параметры? А давайте попробуем
-            //    throw new Exception("There is 3 lections or less each day!");
-            //if (numberOfLection < 0)
-            //    throw new Exception("There isn't any 'minus' lections!");
-            //if (lector.CanTeach != typeOfLection)
-            //    throw new Exception("This teacher can't teach this lection!");
-            //if (!univer.HasTeacher(lector))
-            //    throw new Exception("This teacher is out of the University staff!");
-
             TypeOfLection = typeOfLection;
             Day = day;
             NumberOfLection = numberOfLection;
             Lector = lector;
             Univer = univer;
-        }
-        public override string ToString()
-        {
-            return $"{TypeOfLection} lection";
         }
 
         public static Lection CreateLection(LectionType typeOfLection, DayOfWeek day, int numberOfLection, University univer, Teacher lector)
@@ -71,5 +56,7 @@ namespace Education
             }
             return new Lection(typeOfLection, day, numberOfLection, univer, lector);
         }
+
+        public override string ToString() => $"{TypeOfLection} lection";
     }
 }
