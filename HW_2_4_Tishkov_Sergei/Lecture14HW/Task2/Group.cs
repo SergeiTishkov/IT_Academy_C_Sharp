@@ -20,7 +20,8 @@ namespace Lecture14HW.Task2
                 AddRandomStudent();
         }
 
-        public StudentAvgMarkComparerDelegate SortStudents() => new StudentAvgMarkComparerDelegate(_students.Sort);
+        public StudentAvgMarkComparerDelegate SortStudents() => new StudentAvgMarkComparerDelegate(_students.Sort); // вот так можно вынести наружу делегат, сортирующий студентов приватной коллекции
+        public void SortStudentsByStandartDelegate(Comparison <Student> comparer) => _students.Sort(comparer); // а так посортировать их без выноса 
 
         public void ShowStudents()
         {

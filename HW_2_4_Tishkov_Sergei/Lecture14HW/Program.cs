@@ -14,7 +14,7 @@ namespace Lecture14HW
         static void Main(string[] args)
         {
             //TaskOne();
-            //TaskTwo();
+            TaskTwo();
             //TaskThree();
         }
 
@@ -61,9 +61,10 @@ namespace Lecture14HW
 
             group.ShowStudents();
             group.SortStudents()(Group.AvgMarkComparerAscending);
+            //group.SortStudentsByStandartDelegate( (x, y) => x.AvgMark > y.AvgMark ? 1 : x.AvgMark < y.AvgMark ? -1 : 0 ); // или так, не вынося делегат наружу
 
             Console.WriteLine();
-            group.ShowStudents(); // работает
+            group.ShowStudents();
 
             group.AddAvgMarks(4, 6, 1);
             Console.WriteLine();
