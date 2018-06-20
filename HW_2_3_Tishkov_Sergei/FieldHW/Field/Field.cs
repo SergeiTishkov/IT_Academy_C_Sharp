@@ -10,9 +10,11 @@ namespace FieldHW.Field
 {
     public class Field
     {
+        // TODO Readonly - комментарии в предыдущих работах
         private Random random = new Random((int)DateTime.Now.Ticks);
         private int _numberOfSeason = 1;
         private List<IAnimal> _rabbits;
+        // TODO Readonly - комментарии в предыдущих работах
         private int _rabbitsFertility;
         private List<IAnimal> _tigers;
         private int _grass;
@@ -33,6 +35,8 @@ namespace FieldHW.Field
             _fieldGrassProductivity = fieldGrassProductivity;
             _grass = grass > _grassMaxCount ? _grassMaxCount : grass;
 
+            // TODO 1. Именование локальных переменных метода.
+            // 2. Clean Code practice - не объявлять однотипные переменные через запятую
             int _qOfAnimals = random.Next(randomLowLimit, randomHighLimit),
                 _qOfTigers = _qOfAnimals / (1 + rabbitsToTigersRatio),
                 _qOfRabbits = _qOfAnimals - _qOfTigers;
@@ -54,6 +58,7 @@ namespace FieldHW.Field
         {
             StringBuilder result = new StringBuilder($"*****************************************\n\n\tSTART OF {_numberOfSeason} SEASON\n\n\n");
 
+            // TODO forEach
             for (int i = 0; i < _rabbits.Count; i++)
             {
                 var rabbit = _rabbits[i] as Rabbit;
@@ -62,7 +67,7 @@ namespace FieldHW.Field
                     rabbit.Eat();
                     Grass--;
                     result.Append("Rabbit " + (rabbit.IsMale ? "male" : "female") +
-                        $" {rabbit.Id} is full and looking for couple for reprodiction.\n\n");
+                        $" {rabbit.Id} is full and looking for couple for reproduction.\n\n"); 
                 }
                 else
                 {
@@ -113,6 +118,19 @@ namespace FieldHW.Field
 
             RemoveDeadAnimals(ref _rabbits);
             RemoveDeadAnimals(ref _tigers);
+            // TODO Копирование кода, и слабая читабельность.
+            // Идея в том, что при правильном разделении на классы,
+            // и создания "пищевых пристрастий" ENUM Flags можно в сделать
+            // общий вариант обработки как для кроликов так и для зайцев.
+            // Ну и с точки зрения тестирование, проверить что тут происходить
+            // просто не возможно. Если усложнить логику и ввести поле то всё
+            // станет ещё хуже. Первый принцип SOLID - Single Responsibility.
+            // Пока вы работаете над чем-то один. И вы никогда не будете к этому
+            // возвращаться чтобы посмотреть или переписать один огромный метод будет работать
+            // TODO Вот вам полная версия упрощённой песочницы. https://1drv.ms/f/s!Av6RHCnJE8oAgZJbLN1UsegiEk-BCw
+            // Можете по ковыряться, и с задачей и с тестами. Сразу говорю что смотреть даже не просите,
+            // песочниц со стандартными ошибками я уже слишком много видел. Это скорее вам как разминка 
+            // для мозга если захотите
 
             if (_rabbits.Count == 0)
                 result.Append($"All rabbits are dead, so this season rabbits won't be reproducing.\n\n");

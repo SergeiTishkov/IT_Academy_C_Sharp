@@ -22,6 +22,7 @@ namespace UniverHW.Humans
             FirstName == other.FirstName &&
             LastName == other.LastName &&
             Department == other.Department) ? true : false;
+        // TODO ... https://media.giphy.com/media/J2oXCwOSiQMoM/giphy.gif
 
         public override string ToString() => $"Head of {Department} Department {FirstName} {LastName}";
 

@@ -17,7 +17,7 @@ namespace UniverHW.Humans
             (obj is Student other &&
             FirstName == other.FirstName &&
             LastName == other.LastName &&
-            Department == other.Department) ? true : false;
+            Department == other.Department) ? true : false; // TODO Смотрите Head of Department
 
         public override string ToString() => $"Student {FirstName} {LastName} from {Department} Department";
 

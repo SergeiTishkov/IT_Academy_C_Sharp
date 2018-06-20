@@ -10,6 +10,7 @@ namespace UniverHW
 {
     public class University
     {
+        // TODO Readonly
         internal List<HomoSapiens> TechDepartment;
         internal List<HomoSapiens> MathDepartment;
         internal List<HomoSapiens> HistoryDepartment;
@@ -25,7 +26,7 @@ namespace UniverHW
         {
             if (human == null || string.IsNullOrEmpty(human.FirstName) || string.IsNullOrEmpty(human.LastName))
                 Console.WriteLine("Null people or people without name can't be added");
-
+            // TODO Забыли return добавить в IF. Вначале напишите сообщение, потом поймаете NullReference
             switch (human.Department)
             {
                 case UniversityDepartment.Tech:
