@@ -10,12 +10,10 @@ namespace FieldHW.Field
 {
     public class Field
     {
-        // TODO Readonly - комментарии в предыдущих работах
-        private Random random = new Random((int)DateTime.Now.Ticks);
+        private readonly Random random = new Random((int)DateTime.Now.Ticks);
         private int _numberOfSeason = 1;
         private List<IAnimal> _rabbits;
-        // TODO Readonly - комментарии в предыдущих работах
-        private int _rabbitsFertility;
+        private readonly int _rabbitsFertility;
         private List<IAnimal> _tigers;
         private int _grass;
         private readonly int _grassMaxCount;
@@ -35,11 +33,9 @@ namespace FieldHW.Field
             _fieldGrassProductivity = fieldGrassProductivity;
             _grass = grass > _grassMaxCount ? _grassMaxCount : grass;
 
-            // TODO 1. Именование локальных переменных метода.
-            // 2. Clean Code practice - не объявлять однотипные переменные через запятую
-            int _qOfAnimals = random.Next(randomLowLimit, randomHighLimit),
-                _qOfTigers = _qOfAnimals / (1 + rabbitsToTigersRatio),
-                _qOfRabbits = _qOfAnimals - _qOfTigers;
+            int _qOfAnimals = random.Next(randomLowLimit, randomHighLimit);
+            int _qOfTigers = _qOfAnimals / (1 + rabbitsToTigersRatio);
+            int _qOfRabbits = _qOfAnimals - _qOfTigers;
 
             _rabbits = new List<IAnimal>(_qOfRabbits);
             _tigers = new List<IAnimal>(_qOfTigers);
@@ -58,16 +54,15 @@ namespace FieldHW.Field
         {
             StringBuilder result = new StringBuilder($"*****************************************\n\n\tSTART OF {_numberOfSeason} SEASON\n\n\n");
 
-            // TODO forEach
-            for (int i = 0; i < _rabbits.Count; i++)
+            foreach (var _rabbit in _rabbits)
             {
-                var rabbit = _rabbits[i] as Rabbit;
+                var rabbit = _rabbit as Rabbit;
                 if (Grass > 0)
                 {
                     rabbit.Eat();
                     Grass--;
                     result.Append("Rabbit " + (rabbit.IsMale ? "male" : "female") +
-                        $" {rabbit.Id} is full and looking for couple for reproduction.\n\n"); 
+                        $" {rabbit.Id} is full and looking for couple for reprodiction.\nHope the tigers won't eat it before it succeed.\n\n");
                 }
                 else
                 {
@@ -79,18 +74,17 @@ namespace FieldHW.Field
                     }
                     else
                     {
-                        rabbit.IsStarved = true;
+                        rabbit.Starve();
                         result.Append("Rabbit " + (rabbit.IsMale ? "male" : "female") +
-                        $" {rabbit.Id} was starving this season and not looking for couple.\nHope next season will be more grassful or the rabbit will die.\n\n");
+                        $" {rabbit.Id} was starving this season, but still looking for couple for reprodiction.\nHope next season will be more grassful or the rabbit will die.\n\n");
                     }
                 }
             }
-
             RemoveDeadAnimals(ref _rabbits);
 
-            for (int i = 0; i < _tigers.Count; i++)
+            foreach (var _tiger in _tigers)
             {
-                var tiger = _tigers[i] as Tiger;
+                var tiger = _tiger as Tiger;
                 if (_rabbits.Count > 0)
                 {
                     tiger.Eat();
@@ -108,20 +102,20 @@ namespace FieldHW.Field
                     }
                     else
                     {
-                        tiger.IsStarved = true;
+                        tiger.Starve();
                         result.Append("Tiger " + (tiger.IsMale ? "male" : "female") +
                         $" {tiger.Id} was starving this season, but still looking for couple for reprodiction.\nHope next season will be more rabbitful or the tiger will die.\n\n");
 
                     }
                 }
             }
-
             RemoveDeadAnimals(ref _rabbits);
             RemoveDeadAnimals(ref _tigers);
+
             // TODO Копирование кода, и слабая читабельность.
             // Идея в том, что при правильном разделении на классы,
             // и создания "пищевых пристрастий" ENUM Flags можно в сделать
-            // общий вариант обработки как для кроликов так и для зайцев.
+            // общий вариант обработки как для кроликов так и для тигров.
             // Ну и с точки зрения тестирование, проверить что тут происходить
             // просто не возможно. Если усложнить логику и ввести поле то всё
             // станет ещё хуже. Первый принцип SOLID - Single Responsibility.
@@ -211,18 +205,12 @@ namespace FieldHW.Field
         private void AddNewRabbits(int quantity)
         {
             for (int i = 0; i < quantity; i++)
-            {
                 _rabbits.Add(new Rabbit());
-                Thread.Sleep(new TimeSpan(1));
-            }
         }
         private void AddNewTigers(int quantity)
         {
             for (int i = 0; i < quantity; i++)
-            {
                 _tigers.Add(new Tiger());
-                Thread.Sleep(new TimeSpan(1));
-            }
         }
 
         private void RemoveDeadAnimals(ref List<IAnimal> animals) => animals = animals.Where(a => !a.IsDead).ToList();
@@ -242,83 +230,3 @@ namespace FieldHW.Field
         }
     }
 }
-
-
-
-/*
-            foreach (var rabbit in _rabbits)
-            {
-                if (Grass > 0)
-                {
-                    rabbit.Eat();
-                    Grass--;
-                    result.Append("Rabbit " + (rabbit.IsMale ? "male" : "female") +
-                        $" {rabbit.Id} is full and looking for couple for reprodiction.\nHope the tigers won't eat it before it succeed.\n\n");
-                }
-                else
-                {
-                    if (rabbit.IsStarved)
-                    {
-                        rabbit.IsDead = true;
-                        result.Append("Rabbit " + (rabbit.IsMale ? "male" : "female") +
-                        $" {rabbit.Id} is dead due to starvation for more than one season.\n\n");
-                    }
-                    else
-                    {
-                        rabbit.IsStarved = true;
-                        result.Append("Rabbit " + (rabbit.IsMale ? "male" : "female") +
-                        $" {rabbit.Id} was starving this season, but still looking for couple for reprodiction.\nHope next season will be more grassful or the rabbit will die.\n\n");
-                    }
-                }
-            }
-            */
-
-/*
-        foreach (var tiger in _tigers)
-        {
-            if (_rabbits.Count > 0)
-            {
-                tiger.Eat();
-                _rabbits.Remove(_rabbits[random.Next(0, _rabbits.Count)]);
-                result.Append("Tiger " + (tiger.IsMale ? "male" : "female") +
-                    $" {tiger.Id} is full and looking for couple for reprodiction.\n\n");
-            }
-            else
-            {
-                if (tiger.IsStarved)
-                {
-                    tiger.IsDead = true;
-                    result.Append("Tiger " + (tiger.IsMale ? "male" : "female") +
-                    $" {tiger.Id} is dead due to starvation for more than one season.\n\n");
-                }
-                else
-                {
-                    tiger.IsStarved = true;
-                    result.Append("Tiger " + (tiger.IsMale ? "male" : "female") +
-                    $" {tiger.Id} was starving this season, but still looking for couple for reprodiction.\nHope next season will be more rabbitful or the tiger will die.\n\n");
-
-                }
-            }
-        }
-        */
-
-/*
- private void RabbitsMigration(StringBuilder result)
-    {
-        if (_rabbits.Count < 10 && Grass > _fieldGrassProductivity * _rabbitsFertility)
-        {
-            int newRabbits = random.Next(2, 50);
-            result.Append($"The field looks quite lovely for rabbits from other fields due to small rabbits population.\n{newRabbits} rabbits migrate to the field.\n\n");
-            AddNewRabbits(newRabbits);
-        }
-    }
-    private void TigersMigration(StringBuilder result)
-    {
-        if (_tigers.Count < 2 && _rabbits.Count > 50)
-        {
-            int newTigers = random.Next(2, 6);
-            result.Append($"The field looks quite lovely for tigers from other fields due to small tigers population.\n{newTigers} tigers migrate to the field.\n\n");
-            AddNewTigers(newTigers);
-        }
-    }
-*/

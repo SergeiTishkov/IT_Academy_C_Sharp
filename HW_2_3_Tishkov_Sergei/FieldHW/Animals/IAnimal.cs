@@ -13,5 +13,6 @@ namespace FieldHW.Animals
         bool IsDead { get; }
         bool IsMale { get; }
         void Eat();
+        void Starve();
     }
 }
