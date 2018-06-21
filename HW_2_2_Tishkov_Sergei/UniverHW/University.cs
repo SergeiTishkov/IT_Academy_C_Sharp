@@ -10,10 +10,9 @@ namespace UniverHW
 {
     public class University
     {
-        // TODO Readonly
-        internal List<HomoSapiens> TechDepartment;
-        internal List<HomoSapiens> MathDepartment;
-        internal List<HomoSapiens> HistoryDepartment;
+        internal readonly List<HomoSapiens> TechDepartment;
+        internal readonly List<HomoSapiens> MathDepartment;
+        internal readonly List<HomoSapiens> HistoryDepartment;
 
         public University()
         {
@@ -25,8 +24,11 @@ namespace UniverHW
         public void AddPeople(HomoSapiens human)
         {
             if (human == null || string.IsNullOrEmpty(human.FirstName) || string.IsNullOrEmpty(human.LastName))
+            {
                 Console.WriteLine("Null people or people without name can't be added");
-            // TODO Забыли return добавить в IF. Вначале напишите сообщение, потом поймаете NullReference
+                return;
+            }
+
             switch (human.Department)
             {
                 case UniversityDepartment.Tech:
@@ -44,9 +46,7 @@ namespace UniverHW
         public void AddPeoples (params HomoSapiens[] humans)
         {
             foreach (var human in humans)
-            {
                 AddPeople(human);
-            }
         }
 
         public void MakeUniversityWork()
@@ -60,8 +60,6 @@ namespace UniverHW
         {
             foreach (var human in department)
             {
-                // TODO идея была в том чтобы определить что это за тип и вызвать нужный метод
-                // human.GetMoney(); <- старый код, абстрактный метод, который я удалил
                 switch (human)
                 {
                     case Student student:
@@ -103,9 +101,7 @@ namespace UniverHW
                     default:
                         break;
                 }
-                
             }
-
         }
     }
 }

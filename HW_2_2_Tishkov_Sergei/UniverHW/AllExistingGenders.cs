@@ -6,9 +6,5 @@ using System.Threading.Tasks;
 
 namespace UniverHW
 {
-    // TODO А давайте тогда уже Byte или будем расширять? =)))
-    public enum AllExistingGenders
-    {
-        Male, Female
-    }
+    public enum AllExistingGenders : byte { Male, Female }
 }

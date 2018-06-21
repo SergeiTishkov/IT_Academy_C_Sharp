@@ -28,23 +28,23 @@ namespace HW_1_9_Tishkov_Sergei_
             // (которое точно не может получиться нормальным путём)
             // к примеру: double.NaN, double.NegativeInfinity, double.PositiveInfinity
             _averageMark = null;
-            _marks.Add(mark);
+            if (mark.MarkNumber < 10 && mark.MarkNumber > 0)
+                _marks.Add(mark);
         }
 
-        // TODO исправил, раньше добавлял через foreach и внутренний единичный метод AddMark 
         public void AddMarks(params Mark[] marks)
         {
-            _averageMark = null;
-            _marks.AddRange(marks);
+            foreach (var mark in marks) // чтобы нельзя было вставить оценку больше 10 и меньше 0,  _averageMark = null производится в AddMark
+                _marks.Add(mark);
         }
 
-        public override bool Equals(object obj) => // TODO удалил if true = true else = false
+        public override bool Equals(object obj) =>
             obj is Student other &&
             this.FirstName == other.FirstName &&
             this.LastName == other.LastName &&
             this.DoB == other.DoB;
 
-        public override string ToString() => // TODO исправил на тернарник
+        public override string ToString() =>
             _marks.Count == 0
                 ? $"Student {FirstName} {LastName}, born {DoB:dd MM yyyy}"
                 : $"Student {FirstName} {LastName}, born {DoB:dd MM yyyy}, with his best mark {_marks.Max().MarkNumber}, worst mark {_marks.Min().MarkNumber} and average mark {GetAverageMark}";

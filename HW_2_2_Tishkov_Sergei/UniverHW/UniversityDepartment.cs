@@ -6,8 +6,5 @@ using System.Threading.Tasks;
 
 namespace UniverHW.Humans
 {
-    public enum UniversityDepartment
-    {
-        Tech, Math, History
-    }
+    public enum UniversityDepartment { Tech, Math, History }
 }

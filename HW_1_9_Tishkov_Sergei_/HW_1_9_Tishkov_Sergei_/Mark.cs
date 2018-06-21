@@ -16,7 +16,10 @@ namespace HW_1_9_Tishkov_Sergei_
         {
             LectureName = lectureName;
             Date = date;
-            MarkNumber = markNumber;
+            if (markNumber > 10 || markNumber < 0)
+                MarkNumber = -1;
+            else
+                MarkNumber = markNumber;
         }
 
         public int CompareTo(Mark other)

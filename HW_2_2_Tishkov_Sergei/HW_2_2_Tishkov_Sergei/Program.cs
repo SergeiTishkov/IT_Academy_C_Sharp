@@ -17,6 +17,41 @@ namespace HW_2_2_Tishkov_Sergei
     {
         static void Main(string[] args)
         {
+            UniverHW();
+        }
+
+        public static void UniverHW()
+        {
+            University univer = new University();
+
+            var techHeadmaster = new HeadOfDepartment("Albus", "Dumbledore", UniversityDepartment.Tech, AllExistingGenders.Male);
+            var mathHeadmaster = new HeadOfDepartment("Victoria", "Vector", UniversityDepartment.Math, AllExistingGenders.Female);
+            var histHeadmaster = new HeadOfDepartment("Bobby", "Pins", UniversityDepartment.History, AllExistingGenders.Male);
+
+            var techTeacher = new Teacher("Severus", "Snape", UniversityDepartment.Tech, AllExistingGenders.Male);
+            var mathTeacher = new Teacher("Minerva", "MacGonagall", UniversityDepartment.Math, AllExistingGenders.Female);
+            var histTeacher = new Teacher("Anna", "Zauceva", UniversityDepartment.History, AllExistingGenders.Female);
+
+            var techStudent = new Student("Sergei", "Tishkov", UniversityDepartment.Tech, AllExistingGenders.Male);
+            var mathStudent = new Student("Aleksandr", "Maisak", UniversityDepartment.Math, AllExistingGenders.Male);
+            var histStudent = new Student("Anton", "Akulenok", UniversityDepartment.History, AllExistingGenders.Male);
+
+            univer.AddPeoples(techHeadmaster, techTeacher, techStudent, mathHeadmaster, mathTeacher, mathStudent, histHeadmaster, histTeacher, histStudent);
+
+            Console.WriteLine("\n\nПробуем добавить такого же человека снова:");
+
+            var techTeacher1 = new Teacher("Severus", "Snape", UniversityDepartment.Tech, AllExistingGenders.Male);
+            univer.AddPeople(techTeacher1);
+
+            Console.WriteLine("\n\nА теперь заставим универ работать:");
+
+            univer.MakeUniversityWork();
+
+            Console.ReadKey(true);
+        }
+
+        public static void BankHW()
+        {
             var bankomatPrior = new BankomatPrior("Minsk_Luchini_46");
             var priorAccount = new PriorAccount(3000);
             var account = new Account(2500);
@@ -48,39 +83,7 @@ namespace HW_2_2_Tishkov_Sergei
             Console.WriteLine($"Ой вэй, таки у меня на руках {cash} неназванных денежных знаков!");
             Console.WriteLine("Или таки так: {0:C}", cash); // кстати, у меня значок вопроса показало, почему?
 
-            Console.WriteLine("Проверка задачи с банкоматами закончена, нажмите любую кнопку для продолжения:");
             Console.ReadKey(true);
-            Console.Clear();
-
-            //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  
-            //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  
-            //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  
-
-            University univer = new University();
-
-            var techHeadmaster = new HeadOfDepartment("Albus", "Dumbledore", UniversityDepartment.Tech, AllExistingGenders.Male);
-            var mathHeadmaster = new HeadOfDepartment("Victoria", "Vector", UniversityDepartment.Math, AllExistingGenders.Female);
-            var histHeadmaster = new HeadOfDepartment("Bobby", "Pins", UniversityDepartment.History, AllExistingGenders.Male);
-
-            var techTeacher = new Teacher("Severus", "Snape", UniversityDepartment.Tech, AllExistingGenders.Male);
-            var mathTeacher = new Teacher("Minerva", "MacGonagall", UniversityDepartment.Math, AllExistingGenders.Female);
-            var histTeacher = new Teacher("Anna", "Zauceva", UniversityDepartment.History, AllExistingGenders.Female);
-
-            var techStudent = new Student("Sergei", "Tishkov", UniversityDepartment.Tech, AllExistingGenders.Male);
-            var mathStudent = new Student("Aleksandr", "Maisak", UniversityDepartment.Math, AllExistingGenders.Male);
-            var histStudent = new Student("Anton", "Akulenok", UniversityDepartment.History, AllExistingGenders.Male);
-
-            univer.AddPeoples(techHeadmaster,  techTeacher, techStudent, mathHeadmaster,  mathTeacher, mathStudent, histHeadmaster, histTeacher, histStudent);
-
-            Console.WriteLine("\n\nПробуем добавить такого же человека снова:");
-
-            var techTeacher1 = new Teacher("Severus", "Snape", UniversityDepartment.Tech, AllExistingGenders.Male);
-            univer.AddPeople(techTeacher1);
-
-            Console.WriteLine("\n\nА теперь заставим универ работать:");
-
-            univer.MakeUniversityWork();
-
         }
     }
 }

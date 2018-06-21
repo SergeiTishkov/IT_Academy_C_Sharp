@@ -9,23 +9,16 @@ namespace Education.Humans
 {
     public class Teacher : Human
     {
-        // TODO Readonly
-        internal LectionType CanTeach;
+        internal readonly LectionType CanTeach;
 
-        public Teacher(string fullName, LectionType lectionType) : base(fullName)
-        {
-            CanTeach = lectionType;
-        }
+        public Teacher(string fullName, LectionType lectionType) : base(fullName) => CanTeach = lectionType;
 
-        public override void DoingBusiness(Lection lection)
-        {
-            Work(lection);
-        }
+        public override void DoingBusiness(Lection lection) => Work(lection);
 
-        internal void Work(Lection lection) => // TODO (сделано) реализовал тернарник
+        internal void Work(Lection lection) =>
             Console.WriteLine(
-                lection.Lector == this ?
-                $"{CanTeach} teacher {FullName} is teaching students." :
-                $"{CanTeach} teacher {FullName} is sleeping at home during {lection}.");
+                lection.TypeOfLection.HasFlag(CanTeach)
+                ? $"{CanTeach} teacher {FullName} is teaching students."
+                : $"{CanTeach} teacher {FullName} is sleeping at home during {lection}.");
     }
 }

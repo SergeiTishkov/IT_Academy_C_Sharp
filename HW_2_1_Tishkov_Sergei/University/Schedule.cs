@@ -101,47 +101,13 @@ namespace Education
             }
         }
 
-        // TODO (сделано) Идея понятна, но реализация не очень. А если бы вам пришлось на весь месяц расписание писать?
         public IEnumerator<Lection> GetEnumerator()
         {
-            foreach (var daySchedule in _arrayForForeach) // можно и тройной массив сделать, например, Lection[][][] и запихнуть туда двойные массивы недельных расписаний :) а чо, удобно ведь пользоваться простой логикой извлечения лекции по дню через вызов массива лекций дня
+            foreach (var daySchedule in _arrayForForeach)
                 foreach (var lection in daySchedule)
                     yield return lection;
-            
-            //yield return MondaySchedule[0];
-            //yield return MondaySchedule[1];
-            //yield return MondaySchedule[2];
-
-            //yield return TuesdaySchedule[0];
-            //yield return TuesdaySchedule[1];
-            //yield return TuesdaySchedule[2];
-
-            //yield return WednesdaySchedule[0];
-            //yield return WednesdaySchedule[1];
-            //yield return WednesdaySchedule[2];
-
-            //yield return ThursdaySchedule[0];
-            //yield return ThursdaySchedule[1];
-            //yield return ThursdaySchedule[2];
-
-            //yield return FridaySchedule[0];
-            //yield return FridaySchedule[1];
-            //yield return FridaySchedule[2];
-
-            //yield return SaturdaySchedule[0];
-            //yield return SaturdaySchedule[1];
-            //yield return SaturdaySchedule[2];
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-            //yield return MondaySchedule.GetEnumerator(); // TODO как насчет такой реализации кстати? Она не получилась в паблик методе, черкает красным
-            //yield return TuesdaySchedule.GetEnumerator(); // или оно вернет в обертке эти енумераторы и попробует их потом развернуть в лекции?
-            //yield return WednesdaySchedule.GetEnumerator(); // возвращает ведь не генериковый энемератор, т.е. объекты вроде бы, а не лекции
-            //yield return ThursdaySchedule.GetEnumerator();
-            //yield return FridaySchedule.GetEnumerator();
-            //yield return SaturdaySchedule.GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }

@@ -14,9 +14,9 @@ namespace Education.Humans
 
         public override void Learn(Lection lection) =>  // не стал переносить в класс Student чтобы не потерять в ToString указание на то, какой тип это студента,
             Console.WriteLine(                          //  и не хотел делать свич паттерн матчинг в Learn() в Student, т.к. затраты машинных ресурсов.
-                IsMySpecialization(lection) ?
-                $"{this} is enjoying {lection} and studying hard!" :
-                $"{this} is bored to sleep by {lection}.");
+                IsMySpecialization(lection)
+                ? $"{this} is enjoying {lection} and studying hard!"
+                : $"{this} is bored to sleep by {lection}.");
 
         public override string ToString() => $"Humanitarian student {FullName}";
     }

@@ -9,10 +9,8 @@ namespace Education
 {
     public class University
     {
-        // TODO private readonly naming я предпочитаю _listOfHumans, _schedule
-        private readonly List<Human> listOfHumans = new List<Human>();
-        private readonly WeekSchedule Schedule = new WeekSchedule();
-        // TODO Убирайте вы эти снежные поля, на которых белые медведи едят мороженное
+        private readonly List<Human> _listOfHumans = new List<Human>();
+        private readonly WeekSchedule _schedule = new WeekSchedule();
 
         public void AddPerson(Human human)
         {
@@ -22,14 +20,14 @@ namespace Education
                 return;
             }
 
-            if (listOfHumans.Contains(human))
+            if (_listOfHumans.Contains(human))
             {
                 Console.WriteLine($"{human.GetType().Name} {human.FullName} has already been added.\n");
                 return;
             }
 
             Console.WriteLine($"{human.GetType().Name} {human.FullName} is added!\n");
-            listOfHumans.Add(human);
+            _listOfHumans.Add(human);
         }
 
         public void AddPersons(params Human[] humans)
@@ -42,14 +40,14 @@ namespace Education
 
         public void AddLection(Lection lection)
         {
-            Schedule.AddLection(lection);
+            _schedule.AddLection(lection);
         }
 
         public void AddLections(params Lection[] lections)
         {
             foreach (var lection in lections)
             {
-                Schedule.AddLection(lection);
+                _schedule.AddLection(lection);
             }
         }
 
@@ -59,7 +57,7 @@ namespace Education
             Console.WriteLine("They come to check what is going on during the whole learning week in our University,");
             Console.WriteLine("So the inspection begins from Monday");
             Console.WriteLine("There is all lections in University during this week:\n");
-            foreach (var lection in Schedule)
+            foreach (var lection in _schedule)
             {
                 if (lection != null)
                 {
@@ -78,23 +76,19 @@ namespace Education
 
         private void _checkDayAndLection(DayOfWeek day, int numberOfLection)
         {
-            // TODO Я бы вначале создал переменную
-            Lection lection = Schedule.GetDaySchedule(day)[numberOfLection - 1];
+            Lection lection = _schedule.GetDaySchedule(day)[numberOfLection - 1];
 
-            //if (Schedule.GetDaySchedule(day)[numberOfLection - 1] == null)
             if (lection == null)
             {
                 Console.WriteLine($"There isn't any lection during {numberOfLection} lection place on {day}");
                 return;
             }
 
-            //Lection lection = Schedule.GetDaySchedule(day)[numberOfLection - 1];
             Console.WriteLine($"{lection.Day} {lection.NumberOfLection} lection is {lection.TypeOfLection}:");
-            foreach (var human in listOfHumans)
+            foreach (var human in _listOfHumans)
                 human.DoingBusiness(lection);
         }
 
-        // TODO Ааааааа... да ладно? А что измениться если просто удалить "? true : false"
-        internal bool HasTeacher(Teacher teacher) => listOfHumans.Contains(teacher) ? true : false;
+        internal bool HasTeacher(Teacher teacher) => _listOfHumans.Contains(teacher);
     }
 }
