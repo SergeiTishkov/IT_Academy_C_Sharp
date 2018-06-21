@@ -9,7 +9,9 @@ namespace Education.Humans
 {
     public class Teacher : Human
     {
+        // TODO Readonly
         internal LectionType CanTeach;
+
         public Teacher(string fullName, LectionType lectionType) : base(fullName)
         {
             CanTeach = lectionType;
