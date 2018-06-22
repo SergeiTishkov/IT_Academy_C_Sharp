@@ -5,7 +5,7 @@ using System.Configuration;
 
 using MusicLibrary;
 
-namespace IO_HW
+namespace IO_HW 
 {
     class Program
     {
