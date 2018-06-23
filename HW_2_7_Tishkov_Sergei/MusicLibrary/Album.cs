@@ -39,12 +39,13 @@ namespace MusicLibrary
 
         public override string ToString()
         {
-            StringBuilder result = new StringBuilder($"Album \"{Name}\"\nYear : {Year}\nAuthor : \"{Author}\"\n\nTracks:\n\n");
+            StringBuilder result = new StringBuilder($"Album \"{Name}\"\nAuthor : \"{Author}\"\n\nTracks:\n\n");
             foreach (var track in _tracks)
             {
                 result.Append(track.ToString());
                 result.Append("\n\n");
             }
+                
 
             return result.ToString();
         }

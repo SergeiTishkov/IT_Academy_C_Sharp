@@ -5,7 +5,7 @@ using System.Configuration;
 
 using MusicLibrary;
 
-namespace IO_HW 
+namespace IO_HW
 {
     class Program
     {
@@ -50,6 +50,7 @@ namespace IO_HW
             string dirPath = $"{pathOfAlbumsFolder}{album.Author}";
             if (!Directory.Exists(dirPath))
                 Directory.CreateDirectory(dirPath);
+
             
             string filePath = Path.Combine(pathOfAlbumsFolder, album.Author, $"{album.Name}.txt");
 
