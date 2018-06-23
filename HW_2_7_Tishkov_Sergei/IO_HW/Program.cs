@@ -11,7 +11,7 @@ namespace IO_HW
     {
         static void Main(string[] args) // не стал морочиться с трай-кетчами, можно было, но зачем, я же без ошибок все ввел, для себя
         {
-            AppSettingsReader ar = new AppSettingsReader();
+            AppSettingsReader ar = new AppSettingsReader(); 
             string pathOfAlbumsFolder = (string)ar.GetValue("MusicFolderPath", typeof(string));
 
             SerializeBinary(SetInSilicoPendulumAlbum(), pathOfAlbumsFolder);
