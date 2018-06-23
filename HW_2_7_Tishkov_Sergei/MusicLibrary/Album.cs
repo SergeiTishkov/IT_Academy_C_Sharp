@@ -9,7 +9,7 @@ namespace MusicLibrary
     [Serializable]
     public class Album
     {
-        private readonly Track[] _tracks;
+        private readonly Track[] _tracks; 
         public string Name { get; }
         public string Author { get; }
         public int Year { get; }
