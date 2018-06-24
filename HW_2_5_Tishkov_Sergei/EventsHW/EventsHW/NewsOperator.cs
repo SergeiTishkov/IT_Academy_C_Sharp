@@ -22,13 +22,17 @@ namespace EventsHW.EventsHW
 
         public void NewsArrived(NewsEventArgs args)
         {
-            if (args.Information != null) 
-            {
-                if (!args.Information.OperatorWasSet()) // сделано для того, чтобы если вызвать этот метод вручную из мейна, не вызвав метод SetOperator на новости, Оператор не был null
-                    args.Information.SetOperator(this);
-                else
-                    PopulateFeed?.Invoke(this, args);
-            }
+            if (args.Information == null) return;
+            // Если у новости нету оператора,
+            // 1. установить оператора
+            // 2. Далее вообще неожиданное поведение
+            //    - новость вернётся в оператора и снова вызовет этот метод.
+            if (!args.Information.OperatorWasSet()) 
+                // сделано для того, чтобы если вызвать этот метод вручную из мейна,
+                // не вызвав метод SetOperator на новости, Оператор не был null
+                args.Information.SetOperator(this);
+            else
+                PopulateFeed?.Invoke(this, args);
         }
     }
 }
