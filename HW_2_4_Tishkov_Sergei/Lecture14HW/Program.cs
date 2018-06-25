@@ -20,7 +20,7 @@ namespace Lecture14HW
 
         static void TaskOne()
         {
-            // TODO Задача 1 Делегаты и методы
+            // Задача 1 Делегаты и методы
             /*
              1. Объявить делегат для работы с выборками.
              2. Создать метод, в классе каталог, позволяющий делать выборки из каталога.
@@ -47,7 +47,7 @@ namespace Lecture14HW
 
         static void TaskTwo()
         {
-            // TODO Задача 2 Делегаты и анонимные методы и/или лямбда выражения
+            // Задача 2 Делегаты и анонимные методы и/или лямбда выражения
             /* 
              1. Объявить делегаты для работы со студентами
              2. Создать метод, в классе группа, позволяющий сортировать студентов.
@@ -73,7 +73,7 @@ namespace Lecture14HW
 
         static void TaskThree()
         {
-            // TODO Задача 3* Func, Action + =>
+            // Задача 3* Func, Action + =>
             // В задаче нельзя объявлять делегаты
             /*
              1. Создать методы расширения для класса CarPark:
@@ -91,9 +91,7 @@ namespace Lecture14HW
             Console.WriteLine("\n\n**** FIRST LOOK ON OUR CAR PARK ****\n\n");
             group.ShowCars();
 
-            // TODO a.Price.CompareTo(b.Price) - вложенные тернаники ухудшают читаемость кода
-            // https://rules.sonarsource.com/csharp/RSPEC-3358
-            group.SortCars((a, b) => a.Price > b.Price ? 1 : a.Price == b.Price ? 0 : -1);
+            group.SortCars((a, b) => a.Price.CompareTo(b.Price));
             Console.WriteLine("\n\n**** SECOND LOOK ON OUR CAR PARK AFTER SORTING ****\n\n");
             group.ShowCars();
 

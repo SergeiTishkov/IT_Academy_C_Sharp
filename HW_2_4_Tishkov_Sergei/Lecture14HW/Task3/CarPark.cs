@@ -8,14 +8,15 @@ namespace Lecture14HW.Task3
 {
     public class CarPark
     {
-        public List<Car> Cars { get; set; } = new List<Car>();
+        public List<Car> Cars { get; } = new List<Car>();
         private Action<string> _addingAction;
 
         public CarPark(Action<string> action) => _addingAction = action;
 
         public void AddCar(Car car)
         {
-            // TODO Инвертируем, уменьшаем вложенность, улучшаем читаемость
+            // Инвертируем, уменьшаем вложенность, улучшаем читаемость
+            // комментарий ученика: просто не понял, чего от меня хотят, простите)
             if (car == null) return;
 
             _addingAction(car.ToString() + " was added to the park;");

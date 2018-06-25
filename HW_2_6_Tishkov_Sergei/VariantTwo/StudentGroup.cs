@@ -10,11 +10,10 @@ namespace VariantTwo
 {
     public class StudentGroup
     {
-        // TODO Const Все с большой буквы
-        private const string _nullStudentMessage = "Student is null.";
-        private const string _inproperStudentName = "Student don't have propper name.";
-        // TODO Readonly
-        private List<Student> _list = new List<Student>();
+        private const string NullStudentMessage = "Student is null.";
+        private const string InproperStudentName = "Student don't have propper name.";
+
+        private readonly List<Student> _list = new List<Student>();
 
         public int NumberOfGroup { get; }
 
@@ -29,12 +28,13 @@ namespace VariantTwo
         
         public void AddStudents(IEnumerable<Student> students)
         {
-            // TODO possible null reference exception
+            //if (students == null) return;
+
             foreach (var student in students)
             {
                 ValidateStudent(student, $" Transaction of adding the whole list of {students.Count()} students is over.");
             }
-            foreach (var student in students) // если все студенты валидны, добавит всех, если хоть один не валиден, не добавит никого
+            foreach (var student in students) 
             {
                 AddValidatedStudent(student);
             }
@@ -50,13 +50,13 @@ namespace VariantTwo
         {
             if (student == null)
             {
-                InvalidStudentException ex = new InvalidStudentException(_nullStudentMessage + groupAddingCancelation);
+                InvalidStudentException ex = new InvalidStudentException(NullStudentMessage + groupAddingCancelation);
                 OnInvalidInput?.Invoke(this, new InvalidStudentEventArgs(ex));
                 throw ex;
             }
             if (string.IsNullOrEmpty(student.FullName))
             {
-                InvalidStudentException ex = new InvalidStudentException(_inproperStudentName + groupAddingCancelation);
+                InvalidStudentException ex = new InvalidStudentException(InproperStudentName + groupAddingCancelation);
                 OnInvalidInput?.Invoke(this, new InvalidStudentEventArgs(ex));
                 throw ex;
             }
