@@ -29,9 +29,19 @@ namespace Lecture14HW.Task2
 
         public string FirstName { get; }
 
-        public StudentIncreaseAvgMarkDelegate AvgMarkIncrease() => new StudentIncreaseAvgMarkDelegate
-            ( (lowBound, highBound, increase) => { if (AvgMark <= highBound && AvgMark >= lowBound) AvgMark += increase; } );
+        //public StudentIncreaseAvgMarkDelegate AvgMarkIncreaseAction() => new StudentIncreaseAvgMarkDelegate
+        //    ( (lowBound, highBound, increase) => { if (AvgMark <= highBound && AvgMark >= lowBound) AvgMark += increase; } );
+        // TODO
+        // 1. Мне кажется можно спокойно сделать это свойством
+        // 2. На ревью я бы настаивал на выносе в отдельный класс.
+        // На мой взгляд такое действие не относится к студенту.
+        public StudentIncreaseAvgMarkDelegate AvgMarkIncreaseAction => 
+            (lowBound, highBound, increase) => 
+                {
+                    if (AvgMark <= highBound && AvgMark >= lowBound) AvgMark += increase;
+                };
 
-        public override string ToString() => $"Student {FirstName} {LastName} with average mark {AvgMark:0.##}";
+        public override string ToString() => 
+            $"Student {FirstName} {LastName} with average mark {AvgMark:0.##}";
     }
 }

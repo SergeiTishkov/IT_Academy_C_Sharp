@@ -15,11 +15,11 @@ namespace Lecture14HW.Task3
 
         public void AddCar(Car car)
         {
-            if (car != null)
-            {
-                _addingAction(car.ToString() + " was added to the park;");
-                Cars.Add(car);
-            }
+            // TODO Инвертируем, уменьшаем вложенность, улучшаем читаемость
+            if (car == null) return;
+
+            _addingAction(car.ToString() + " was added to the park;");
+            Cars.Add(car);
         }
 
         public void AddCars(params Car[] cars)

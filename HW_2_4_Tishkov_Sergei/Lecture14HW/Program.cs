@@ -13,9 +13,9 @@ namespace Lecture14HW
     {
         static void Main(string[] args)
         {
-            //TaskOne();
+            TaskOne();
             TaskTwo();
-            //TaskThree();
+            TaskThree();
         }
 
         static void TaskOne()
@@ -91,6 +91,8 @@ namespace Lecture14HW
             Console.WriteLine("\n\n**** FIRST LOOK ON OUR CAR PARK ****\n\n");
             group.ShowCars();
 
+            // TODO a.Price.CompareTo(b.Price) - вложенные тернаники ухудшают читаемость кода
+            // https://rules.sonarsource.com/csharp/RSPEC-3358
             group.SortCars((a, b) => a.Price > b.Price ? 1 : a.Price == b.Price ? 0 : -1);
             Console.WriteLine("\n\n**** SECOND LOOK ON OUR CAR PARK AFTER SORTING ****\n\n");
             group.ShowCars();

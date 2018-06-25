@@ -10,11 +10,13 @@ namespace VariantTwo
 {
     public class StudentGroup
     {
+        // TODO Const Все с большой буквы
         private const string _nullStudentMessage = "Student is null.";
         private const string _inproperStudentName = "Student don't have propper name.";
+        // TODO Readonly
+        private List<Student> _list = new List<Student>();
 
         public int NumberOfGroup { get; }
-        private List<Student> _list = new List<Student>();
 
         public StudentGroup(int numberOfGroup) => NumberOfGroup = numberOfGroup;
 
@@ -27,6 +29,7 @@ namespace VariantTwo
         
         public void AddStudents(IEnumerable<Student> students)
         {
+            // TODO possible null reference exception
             foreach (var student in students)
             {
                 ValidateStudent(student, $" Transaction of adding the whole list of {students.Count()} students is over.");
