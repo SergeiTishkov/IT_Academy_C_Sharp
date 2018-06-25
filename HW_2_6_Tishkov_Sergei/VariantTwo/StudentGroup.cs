@@ -69,7 +69,7 @@ namespace VariantTwo
                 Console.WriteLine("There isn't any student in the group.");
                 return;
             }
-            Console.WriteLine($"The group has {_list.Count} student" + (_list.Count == 1 ? ":" : "s:"));
+            Console.WriteLine($"The group has {_list.Count} student{(_list.Count == 1 ? ":" : "s:")}");
             foreach (var student in _list)
             {
                 Console.WriteLine(student);
@@ -87,10 +87,3 @@ namespace VariantTwo
         internal event EventHandler<InvalidStudentEventArgs> OnInvalidInput;
     }
 }
-
-/*
- Вариант 2
-Создать класс StudentGroup со своими методами добавления студентов
-При успешном добавлении/удалении студента должно пробрасываться событие OnCollectionChange. На него должен быть подписан консольный логгер.
-При добавлении невалидного студента должно пробрасываться событие OnInvalidInput.
-*/
