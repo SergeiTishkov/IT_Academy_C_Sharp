@@ -1,7 +1,7 @@
 ﻿
 namespace EventsLib
 {
-    internal class News
+    internal class News 
     {
         internal NewsType Type { get; }
         internal string Header { get; }
