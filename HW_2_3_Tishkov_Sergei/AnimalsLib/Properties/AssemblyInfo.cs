@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("HW_2_3_Tishkov_Sergei")]
+[assembly: AssemblyTitle("AnimalsLib")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("HW_2_3_Tishkov_Sergei")]
+[assembly: AssemblyProduct("AnimalsLib")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("738f8948-32b5-4194-be44-a24a3410a961")]
+[assembly: Guid("00c870db-8370-4fff-90e4-19d24c019d36")]
 
 // Version information for an assembly consists of the following four values:
 //

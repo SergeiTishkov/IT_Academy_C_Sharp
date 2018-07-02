@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FieldHW")]
+[assembly: AssemblyTitle("InterfaceHW")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("FieldHW")]
+[assembly: AssemblyProduct("InterfaceHW")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("90d0073b-9dfb-420d-88e4-0a10e0d37ab6")]
+[assembly: Guid("aa8c9ae6-aee5-4707-998d-535b149d976c")]
 
 // Version information for an assembly consists of the following four values:
 //
