@@ -76,7 +76,11 @@ namespace AnimalsLib.Field
                     case TypeOfConsumption.Carnivore:
                         AnimalEat(animal, _animals);
                         break;
-                    case TypeOfConsumption.Omnivore: // я планирую расширить программу до настоящей песочницы, этот кейс - задел на будущее
+                    // я планирую расширить программу до настоящей песочницы, этот кейс - задел на будущее
+                    // он пока плохо настроен, получается, что медведь шел по полю, полному ягод, не нашел 
+                    // зайца, и помер от расстройства
+                    // но т.к. все равно пока всеядных животных не добавлено, я не исправлял эту проблему
+                    case TypeOfConsumption.Omnivore: 
                         if (_random.NextDouble() < 0.5)
                         {
                             goto case TypeOfConsumption.Herbivore;
