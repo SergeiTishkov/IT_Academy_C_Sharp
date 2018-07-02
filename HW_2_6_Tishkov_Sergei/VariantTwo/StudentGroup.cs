@@ -8,7 +8,7 @@ using VariantTwo.Loggers;
 
 namespace VariantTwo
 {
-    public class StudentGroup
+    public class StudentGroup 
     {
         private const string NullStudentMessage = "Student is null.";
         private const string InproperStudentName = "Student don't have propper name.";
@@ -72,7 +72,7 @@ namespace VariantTwo
             Console.WriteLine($"The group has {_list.Count} student{(_list.Count == 1 ? ":" : "s:")}");
             foreach (var student in _list)
             {
-                Console.WriteLine(student);
+                Console.WriteLine(student); 
             }
         }
 
