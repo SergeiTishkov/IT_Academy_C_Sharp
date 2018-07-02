@@ -18,7 +18,7 @@ namespace Lecture14HW
             TaskThree();
         }
 
-        static void TaskOne()
+        static void TaskOne() 
         {
             // Задача 1 Делегаты и методы
             /*
