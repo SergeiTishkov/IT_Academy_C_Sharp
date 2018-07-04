@@ -12,9 +12,10 @@ namespace AnimalsLib.Field
 {
     public class Field
     {
+        private readonly Random _random = new Random((int)DateTime.Now.Ticks);
+        
         private List<IAnimal> _animals = new List<IAnimal>();
         private List<IPlant> _plants = new List<IPlant>();
-        private readonly Random _random = new Random((int)DateTime.Now.Ticks);
 
         private readonly int _grassGrowthSpeed;
 
