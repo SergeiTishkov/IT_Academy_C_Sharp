@@ -125,6 +125,12 @@ namespace AnimalsLib.Field
             int CountOfFullPairs<T>()
                 where T : IAnimal
             {
+                /*
+                скажите, не лучше ли было бы создать массив, чтобы не делать
+                итерацию по условию (a => a is T && !a.IsHungry) дважды, для самцов и самок?
+                
+                IAnimal[] fullAnimals = _animals.Where(a => a is T && !a.IsHungry).ToArray();
+                */
                 IEnumerable<IAnimal> fullAnimals = _animals.Where(a => a is T && !a.IsHungry);
                 int males = fullAnimals.Count(a => a.Sex == Sex.Male);
                 int females = fullAnimals.Count(a => a.Sex == Sex.Female);
@@ -142,6 +148,8 @@ namespace AnimalsLib.Field
 
         // нормально ли пояснять названием генерик типа его предназначение?
         // особенно если это генерик типы с замороченными требованиями
+        // с одной стороны, упрощается работа с ними, с другой - может устареть
+        // например, CreatureToAdd не устареет, а вот IPlantOrIAnimal устареть может
         private void AddCreatures<CreatureToAdd, IPlantOrIAnimal>(List<IPlantOrIAnimal> creatures, int quantity)
             where CreatureToAdd : IPlantOrIAnimal, new()
             where IPlantOrIAnimal : IFood
