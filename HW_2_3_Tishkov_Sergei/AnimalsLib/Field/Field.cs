@@ -23,9 +23,9 @@ namespace AnimalsLib.Field
                       int lowerBoundTigers, int higherBoundTigers,
                       int startGrassQuantity, int grassGrowthSpeed)
         {
-            AddCreatures<Rabbit, IAnimal>(_animals, _random.Next(lowerBoundRabbits, higherBoundRabbits));
-            AddCreatures<Tiger, IAnimal>(_animals, _random.Next(lowerBoundTigers, higherBoundTigers));
-            AddCreatures<Grass, IPlant>(_plants, startGrassQuantity);
+            AddCreatures<IAnimal, Rabbit>(_animals, _random.Next(lowerBoundRabbits, higherBoundRabbits));
+            AddCreatures<IAnimal, Tiger>(_animals, _random.Next(lowerBoundTigers, higherBoundTigers));
+            AddCreatures<IPlant, Grass>(_plants, startGrassQuantity);
 
             _grassGrowthSpeed = grassGrowthSpeed;
         }
@@ -78,29 +78,40 @@ namespace AnimalsLib.Field
                 switch (animal.TypeOfConsumption)
                 {
                     case TypeOfConsumption.Herbivore:
-                        AnimalEat(animal, _plants);
+                        if (AnimalFailedToFindFood(animal, _plants))
+                            animal.Starve();
                         break;
                     case TypeOfConsumption.Carnivore:
-                        AnimalEat(animal, _animals);
+                        if (AnimalFailedToFindFood(animal, _animals))
+                            animal.Starve();
                         break;
-                    // я планирую расширить программу до настоящей песочницы, этот кейс - задел на будущее
-                    // он пока плохо настроен, получается, что медведь шел по полю, полному ягод, не нашел 
-                    // зайца, и помер от расстройства
-                    // но т.к. все равно пока всеядных животных не добавлено, я не исправлял эту проблему
                     case TypeOfConsumption.Omnivore:
                         if (_random.NextDouble() < 0.5)
                         {
-                            goto case TypeOfConsumption.Herbivore;
+                            if (AnimalFailedToFindFood(animal, _animals))
+                            {
+                                if (AnimalFailedToFindFood(animal, _plants))
+                                {
+                                    animal.Starve();
+                                }
+                            }
                         }
                         else
                         {
-                            goto case TypeOfConsumption.Carnivore;
+                            if (AnimalFailedToFindFood(animal, _plants))
+                            {
+                                if (AnimalFailedToFindFood(animal, _animals))
+                                {
+                                    animal.Starve();
+                                }
+                            }
                         }
+                        break;
                 }
             }
             RemoveDeadCreatures();
 
-            void AnimalEat<T>(IAnimal animal, List<T> food)
+            bool AnimalFailedToFindFood<T>(IAnimal animal, List<T> food)
                 where T : IFood
             {
                 int index = food.FindIndex(f => !f.IsDead && animal.CanEat.HasFlag(f.CanBeEatenAs));
@@ -108,29 +119,29 @@ namespace AnimalsLib.Field
                 {
                     food[index].Die();
                     animal.Eat();
+                    return false;
                 }
                 else
                 {
-                    animal.Starve();
+                    return true;
                 }
             }
         }
 
         private void CreaturesBreed()
         {
-            AddCreatures<Rabbit, IAnimal>(_animals, CountOfFullPairs<Rabbit>());
-            AddCreatures<Tiger, IAnimal>(_animals, CountOfFullPairs<Tiger>());
-            AddCreatures<Grass, IPlant>(_plants, _grassGrowthSpeed);
+            AddCreatures<IAnimal, Rabbit>(_animals, CountOfFullPairs<Rabbit>());
+            AddCreatures<IAnimal, Tiger>(_animals, CountOfFullPairs<Tiger>());
+            AddCreatures<IPlant, Grass>(_plants, _grassGrowthSpeed);
 
             int CountOfFullPairs<T>()
                 where T : IAnimal
             {
-                /*
-                скажите, не лучше ли было бы создать массив, чтобы не делать
-                итерацию по условию (a => a is T && !a.IsHungry) дважды, для самцов и самок?
+                // скажите, не лучше ли было бы создать массив, чтобы не делать
+                // итерацию по условию (a => a is T && !a.IsHungry) дважды, для самцов и самок?
+                // IAnimal[] fullAnimals = _animals.Where(a => a is T && !a.IsHungry).ToArray();
+                // тут фактически я fullAnimals создал только ради простоты написания предиката
                 
-                IAnimal[] fullAnimals = _animals.Where(a => a is T && !a.IsHungry).ToArray();
-                */
                 IEnumerable<IAnimal> fullAnimals = _animals.Where(a => a is T && !a.IsHungry);
                 int males = fullAnimals.Count(a => a.Sex == Sex.Male);
                 int females = fullAnimals.Count(a => a.Sex == Sex.Female);
@@ -146,17 +157,13 @@ namespace AnimalsLib.Field
             }
         }
 
-        // нормально ли пояснять названием генерик типа его предназначение?
-        // особенно если это генерик типы с замороченными требованиями
-        // с одной стороны, упрощается работа с ними, с другой - может устареть
-        // например, CreatureToAdd не устареет, а вот IPlantOrIAnimal устареть может
-        private void AddCreatures<CreatureToAdd, IPlantOrIAnimal>(List<IPlantOrIAnimal> creatures, int quantity)
-            where CreatureToAdd : IPlantOrIAnimal, new()
-            where IPlantOrIAnimal : IFood
+        private void AddCreatures<T, C>(List<T> creatures, int quantity)
+            where T : IFood
+            where C : T, new()
         {
             for (; quantity > 0; quantity--)
             {
-                creatures.Add(new CreatureToAdd());
+                creatures.Add(new C());
             }
         }
 
