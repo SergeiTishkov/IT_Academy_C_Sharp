@@ -19,7 +19,9 @@ namespace AnimalsLib.Field
 
         private readonly int _grassGrowthSpeed;
 
-        private Field(int lowerBoundRabbits, int higherBoundRabbits, int lowerBoundTigers, int higherBoundTigers, int startGrassQuantity, int grassGrowthSpeed)
+        private Field(int lowerBoundRabbits, int higherBoundRabbits,
+                      int lowerBoundTigers, int higherBoundTigers,
+                      int startGrassQuantity, int grassGrowthSpeed)
         {
             AddAnimals<Rabbit>(_random.Next(lowerBoundRabbits, higherBoundRabbits));
             AddAnimals<Tiger>(_random.Next(lowerBoundTigers, higherBoundTigers));
@@ -28,7 +30,9 @@ namespace AnimalsLib.Field
             _grassGrowthSpeed = grassGrowthSpeed;
         }
 
-        public static Field NewField(int lowerBoundRabbits, int higherBoundRabbits, int lowerBoundTigers, int higherBoundTigers, int startGrassQuantity, int grassGrowthSpeed)
+        public static Field NewField(int lowerBoundRabbits, int higherBoundRabbits,
+                                     int lowerBoundTigers, int higherBoundTigers,
+                                     int startGrassQuantity, int grassGrowthSpeed)
         {
             if (lowerBoundRabbits < 0 || higherBoundRabbits < 0 ||
                 lowerBoundTigers < 0 || higherBoundTigers < 0 ||
