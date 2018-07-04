@@ -141,7 +141,7 @@ namespace AnimalsLib.Field
         }
 
         // нормально ли пояснять названием генерик типа его предназначение?
-        // особенно если генерик типы с замороченными требованиями
+        // особенно если это генерик типы с замороченными требованиями
         private void AddCreatures<CreatureToAdd, IPlantOrIAnimal>(List<IPlantOrIAnimal> creatures, int quantity)
             where CreatureToAdd : IPlantOrIAnimal, new()
             where IPlantOrIAnimal : IFood
