@@ -13,7 +13,7 @@ namespace AnimalsLib.Field
     public class Field
     {
         private readonly Random _random = new Random((int)DateTime.Now.Ticks);
-        
+
         private List<IAnimal> _animals = new List<IAnimal>();
         private List<IPlant> _plants = new List<IPlant>();
 
@@ -23,9 +23,9 @@ namespace AnimalsLib.Field
                       int lowerBoundTigers, int higherBoundTigers,
                       int startGrassQuantity, int grassGrowthSpeed)
         {
-            AddAnimals<Rabbit>(_random.Next(lowerBoundRabbits, higherBoundRabbits));
-            AddAnimals<Tiger>(_random.Next(lowerBoundTigers, higherBoundTigers));
-            AddPlants<Grass>(startGrassQuantity);
+            AddCreatures<Rabbit, IAnimal>(_animals, _random.Next(lowerBoundRabbits, higherBoundRabbits));
+            AddCreatures<Tiger, IAnimal>(_animals, _random.Next(lowerBoundTigers, higherBoundTigers));
+            AddCreatures<Grass, IPlant>(_plants, startGrassQuantity);
 
             _grassGrowthSpeed = grassGrowthSpeed;
         }
@@ -40,7 +40,9 @@ namespace AnimalsLib.Field
                 lowerBoundRabbits > higherBoundRabbits ||
                 lowerBoundTigers > higherBoundTigers)
                 return null;
-            return new Field(lowerBoundRabbits, higherBoundRabbits, lowerBoundTigers, higherBoundTigers, startGrassQuantity, grassGrowthSpeed);
+            return new Field(lowerBoundRabbits, higherBoundRabbits,
+                             lowerBoundTigers, higherBoundTigers,
+                             startGrassQuantity, grassGrowthSpeed);
         }
 
         public string AnimalsStatus()
@@ -85,7 +87,7 @@ namespace AnimalsLib.Field
                     // он пока плохо настроен, получается, что медведь шел по полю, полному ягод, не нашел 
                     // зайца, и помер от расстройства
                     // но т.к. все равно пока всеядных животных не добавлено, я не исправлял эту проблему
-                    case TypeOfConsumption.Omnivore: 
+                    case TypeOfConsumption.Omnivore:
                         if (_random.NextDouble() < 0.5)
                         {
                             goto case TypeOfConsumption.Herbivore;
@@ -116,9 +118,9 @@ namespace AnimalsLib.Field
 
         private void CreaturesBreed()
         {
-            AddAnimals<Rabbit>(CountOfFullPairs<Rabbit>());
-            AddAnimals<Tiger>(CountOfFullPairs<Tiger>());
-            AddPlants<Grass>(_grassGrowthSpeed);
+            AddCreatures<Rabbit, IAnimal>(_animals, CountOfFullPairs<Rabbit>());
+            AddCreatures<Tiger, IAnimal>(_animals, CountOfFullPairs<Tiger>());
+            AddCreatures<Grass, IPlant>(_plants, _grassGrowthSpeed);
 
             int CountOfFullPairs<T>()
                 where T : IAnimal
@@ -138,21 +140,15 @@ namespace AnimalsLib.Field
             }
         }
 
-        private void AddAnimals<T>(int quantity)
-            where T : IAnimal, new()
+        // нормально ли пояснять названием генерик типа его предназначение?
+        // особенно если генерик типы с замороченными требованиями
+        private void AddCreatures<CreatureToAdd, IPlantOrIAnimal>(List<IPlantOrIAnimal> creatures, int quantity)
+            where CreatureToAdd : IPlantOrIAnimal, new()
+            where IPlantOrIAnimal : IFood
         {
             for (; quantity > 0; quantity--)
             {
-                _animals.Add(new T());
-            }
-        }
-
-        private void AddPlants<T>(int quantity)
-            where T : IPlant, new()
-        {
-            for (; quantity > 0; quantity--)
-            {
-                _plants.Add(new T());
+                creatures.Add(new CreatureToAdd());
             }
         }
 
